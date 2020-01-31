@@ -122,7 +122,9 @@ router.get('/', async (req, res) => {
 router.get('/user/:user_id', async (req, res) => {
 	try {
 		const profile = await Profile.findOne({
+			// Get user_id from the URL
 			user: req.params.user_id
+			// Get Name + Avatar From The User
 		}).populate('user', ['name', 'avatar']);
 
 		if (!profile) return res.status(400).json({ msg: 'Profile not found' });
@@ -244,6 +246,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 		const foundProfile = await Profile.findOne({ user: req.user.id });
 		const expIds = foundProfile.experience.map((exp) => exp._id.toString());
 		// if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /experience/5
+		// Get Remove Index
 		const removeIndex = expIds.indexOf(req.params.exp_id);
 		if (removeIndex === -1) {
 			return res.status(500).json({ msg: 'Server error' });
