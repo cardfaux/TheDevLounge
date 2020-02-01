@@ -67,3 +67,13 @@ _the setCurrentUser is set to user => dispatch(setCurrentUser(user))_
 **import the ROOTREDUCER from reducers directory**
 **set initialState to an empty object**
 **set store to createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))**
+**Consume the store With the Provider At The App Level**
+**combineReducers from redux combines all the reducers into the ROOTREDUCER**
+
+_in alert.jsx reducer that is brought into the ROOTREDUCER initial state is an empty array_
+_export the function as default_
+_will take in the state = initialState and an action evaluate the action type with a SWITCH statement_
+
+**We have and action called setAlert in the actions folder in the alert.js file. That dispatches the SET_ALERT type To the REDUCER**
+**In the Register.jsx File import the CONNECT component from react-redux exported with the default export at the bottom of the file. as a HOC**
+**Import the setAlert action from the ../../actions/alert**
