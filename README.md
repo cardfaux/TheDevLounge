@@ -77,3 +77,12 @@ _will take in the state = initialState and an action evaluate the action type wi
 **We have and action called setAlert in the actions folder in the alert.js file. That dispatches the SET_ALERT type To the REDUCER**
 **In the Register.jsx File import the CONNECT component from react-redux exported with the default export at the bottom of the file. as a HOC**
 **Import the setAlert action from the ../../actions/alert**
+
+# THINGS TO DO
+*ADD REDUXFORM*
+*ADD DOCKER*
+*ADD MORE GITHUB INFORMATION*
+*ADD GOOGLEMAPS OR LEAFLET*
+*ADD STYLEDCOMPONENTS*
+*ADD REACTICONS*
+*ADD GRAPHQL*
