@@ -52,3 +52,18 @@ _The Object will have the Prop Name whatever we prop we want to pass in that DIS
 _which here is SET_CURRENT_USER_
 _We need the setCurrentUser from the redux/user/userActions in the App component_
 _the setCurrentUser is set to user => dispatch(setCurrentUser(user))_
+
+## Profile Data We get from the server That Data will be put into The Redux Store Fire off an action to fetch The Data that gets put in a Store
+
+#### From any component we can call An Action That Will Do Something. The Reducer Takes In An Action We can Dispatch an Action To the Reducer.
+
+#### The reducer will update any componnets that use that piece of state.
+
+# ALERT REDUCERS
+
+**In the Store.jsx file import createStore and applyMiddleware from REDUX**
+**import composeWithDevTools from redux-devtools-extension**
+**import THUNK from redux-thunk**
+**import the ROOTREDUCER from reducers directory**
+**set initialState to an empty object**
+**set store to createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))**
