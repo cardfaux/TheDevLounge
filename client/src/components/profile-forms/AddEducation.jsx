@@ -112,7 +112,7 @@ const AddEducation = ({ addEducation, history }) => {
 					<textarea
 						name='description'
 						cols='30'
-						rows='5'
+						rows='10'
 						placeholder='Program Description'
 						value={description}
 						onChange={(e) => onChange(e)}

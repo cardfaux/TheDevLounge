@@ -1,6 +1,7 @@
 // REACT Imports
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 // REDUX Imports
 import { Provider } from 'react-redux';
 import store from './store';
