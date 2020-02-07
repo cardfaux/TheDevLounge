@@ -1,0 +1,7 @@
+{
+	"mongoURI": "mongodb+srv://Cardfaux:Fsuore1234@cluster0-8lwhh.mongodb.net/thedevlounge?retryWrites=true&w=majority",
+	"jwtSecret": "mysecrettokentodayitisasecret1357908642",
+	"githubClientId": "9888e39e24c5b84c34b3",
+	"githubSecret": "5c99d54817af94714c38554b4bed86c08bab752a",
+	"githubToken": "ed9b0bd6bddca6e8805cf9f20c5a6e02a1ff1ed4"
+}
