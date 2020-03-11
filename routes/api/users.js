@@ -6,22 +6,21 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
-// Bring In The User Model
 const User = require('../../models/User');
 
-// @route   POST api/users
-// @desc    Register User
-// @access  Public
+// @route    POST api/users
+// @desc     Register user
+// @access   Public
 router.post(
 	'/',
 	[
-		check('name', 'Name Is Required')
+		check('name', 'Name is required')
 			.not()
 			.isEmpty(),
-		check('email', 'Please Include A Valid E-Mail').isEmail(),
+		check('email', 'Please include a valid email').isEmail(),
 		check(
 			'password',
-			'Please Enter A Password With 6 Or More Characters'
+			'Please enter a password with 6 or more characters'
 		).isLength({ min: 6 })
 	],
 	async (req, res) => {
@@ -30,20 +29,17 @@ router.post(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		// Destructuring Properties From req.body
 		const { name, email, password } = req.body;
 
 		try {
-			// See If User Exists
-			let user = await User.findOne({ email: email });
+			let user = await User.findOne({ email });
 
 			if (user) {
 				return res
 					.status(400)
-					.json({ errors: [{ msg: 'User Already Exists' }] });
+					.json({ errors: [{ msg: 'User already exists' }] });
 			}
 
-			// Get Users Gravatar
 			const avatar = gravatar.url(email, {
 				s: '200',
 				r: 'pg',
@@ -57,14 +53,12 @@ router.post(
 				password
 			});
 
-			// Encrypt Password
-			const salt = await bcrypt.genSalt(10); // Creates Salt
+			const salt = await bcrypt.genSalt(10);
 
-			user.password = await bcrypt.hash(password, salt); // Hashes Password with the password and the salt
+			user.password = await bcrypt.hash(password, salt);
 
-			await user.save(); // Saves The User Object with The Encrypted Password
+			await user.save();
 
-			// Return JsonWebToken This will Return A Token In The Body, We Can Send It In The Headers
 			const payload = {
 				user: {
 					id: user.id
@@ -82,7 +76,7 @@ router.post(
 			);
 		} catch (err) {
 			console.error(err.message);
-			res.status(500).send('Server Error');
+			res.status(500).send('Server error');
 		}
 	}
 );

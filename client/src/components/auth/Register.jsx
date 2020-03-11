@@ -1,28 +1,61 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useReducer } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
-	const [formData, setFormData] = useState({
-		name: '',
-		email: '',
-		password: '',
-		password2: ''
-	});
+function loginReducer(state, action) {
+	switch (action.type) {
+		case 'field': {
+			return {
+				...state,
+				[action.field]: action.value
+			};
+		}
+		case 'register': {
+			return {
+				...state
+			};
+		}
+		default:
+			return state;
+	}
+}
 
-	const { name, email, password, password2 } = formData;
+const initialState = {
+	name: '',
+	email: '',
+	password: '',
+	password2: ''
+};
+
+const Register = ({ setAlert, register, isAuthenticated }) => {
+	const [state, dispatch] = useReducer(loginReducer, initialState);
+
+	const { email, name, password, password2 } = state;
+
+	// const [formData, setFormData] = useState({
+	// 	name: '',
+	// 	email: '',
+	// 	password: '',
+	// 	password2: ''
+	// });
+
+	// const { name, email, password, password2 } = formData;
+
+	// const onChange = (e) =>
+	// 	setFormData({ ...formData, [e.target.name]: e.target.value });
 
 	const onChange = (e) =>
-		setFormData({ ...formData, [e.target.name]: e.target.value });
+		dispatch({ type: 'field', field: [e.target.name], value: e.target.value });
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		if (password !== password2) {
-			setAlert('Passwords Do Not Match', 'danger');
+			setAlert('Passwords Do Not Match', 'danger', 3000);
 		} else {
+			dispatch({ type: 'register' });
 			register({ name, email, password });
 		}
 	};

@@ -1,22 +1,53 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useReducer } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 
-const Login = ({ login, isAuthenticated }) => {
-	const [formData, setFormData] = useState({
-		email: '',
-		password: ''
-	});
+function loginReducer(state, action) {
+	switch (action.type) {
+		case 'field': {
+			return {
+				...state,
+				[action.field]: action.value
+			};
+		}
+		case 'login': {
+			return {
+				...state
+			};
+		}
+		default:
+			return state;
+	}
+}
 
-	const { email, password } = formData;
+const initialState = {
+	email: '',
+	password: ''
+};
+
+const Login = ({ login, isAuthenticated }) => {
+	const [state, dispatch] = useReducer(loginReducer, initialState);
+
+	const { email, password } = state;
+
+	// const [formData, setFormData] = useState({
+	// 	email: '',
+	// 	password: ''
+	// });
+
+	// const { email, password } = formData;
+
+	// const onChange = (e) =>
+	// 	setFormData({ ...formData, [e.target.name]: e.target.value });
 
 	const onChange = (e) =>
-		setFormData({ ...formData, [e.target.name]: e.target.value });
+		dispatch({ type: 'field', field: [e.target.name], value: e.target.value });
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		dispatch({ type: 'login' });
 		login(email, password);
 	};
 

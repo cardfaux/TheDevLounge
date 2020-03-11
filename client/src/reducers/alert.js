@@ -5,6 +5,7 @@ const initialState = [];
 export default function(state = initialState, action) {
 	const { type, payload } = action;
 
+	// Gets Triggered By The Dispatch In The Actions File
 	switch (type) {
 		case SET_ALERT:
 			return [...state, payload];
